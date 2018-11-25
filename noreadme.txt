@@ -1,1 +1,1 @@
-Зачем
+New world, wait for me!
