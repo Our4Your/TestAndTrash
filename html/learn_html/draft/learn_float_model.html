@@ -31,10 +31,28 @@
         background-color: lightyellow;
         border: 1px solid black;
     }
+    .fl2 {
+        float: left;
+        min-height: 100px;
+        width: 100px;
+        background-color: lightblue;
+        border: 1px solid black; 
+    }
+    .fr2 {
+        float: right;
+        min-height: 20px;
+        width: 100px;
+        background-color: lightyellow;
+        border: 1px solid black; 
+    }
     
 
     h1, h2, h3 {
         text-align: center;
+    }
+
+    strong {
+        color:red;
     }
 
     .clearfix::after {
@@ -48,13 +66,53 @@
         -o-transition: all 60s linear;
         -webkit-transition: all 60s linear;
     }
+
     .resize1:hover
     {
         width: 120px;
     }
+
+
+    .normal {
+        min-height: 100px;
+        background-color: #ccc;
+        border: 1px solid black;
+    }
+    .clear-both {
+        clear: both;
+    }
+    .clear-left
+    {
+        clear: left;
+    }
+    .clear-right
+    {
+        clear: right;
+    }
+    .border-sol_black {
+        border: 1px solid black;
+
+    }
+    .margin_top20 {
+        margin-top: 20px;
+    }
    </style>
 </head>
 <body>
+    <h1>float поток в HTML документе!</h1>
+    <p><strong>Самое главное – у float блоков есть свой собственный поток который развивается по своим особенным законам.</strong></p>
+    <ol>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
     <h2>Что происходит #1</h2>
     <p><em>Следует навести курсор на блок "fl1" и медитировать над тем что происходит!(медитировать - искать объяснение)</em></p>
     <h3>Вариант #1</h3>
@@ -141,5 +199,72 @@ HTML(обратить внимание на порядок следования 
     </div>
     <p>А сейчас правые блоки начинают двигатся первыми!</p>
     <img src="img/first_question_002.png">
+
+    <div class="draft">
+        <h2>Черновик</h2>
+        <h3>Свойство clear</h3>
+        <table>
+                <tbody><tr>
+                    <th>Значение</th>
+                    <th>Описание</th>
+                </tr>
+                <tr>
+                    <td>left</td>
+                    <td>Плавающие элементы не разрешены с левой стороны. Т.е. поток будет опущен(переведён) вниз на <strong>ширину блока</strong> в котором установлено свойство clear: left
+                        Но при условии что слева будет плавающий элемент ЕСЛИ будет родитель то ничено не произойдёт!
+                    </td>
+                </tr>
+                <tr>
+                    <td>right</td>
+                    <td>Плавающие элементы не разрешены с правой стороны. Т.е. поток будет опущен(переведён) вниз на <strong>ширину блока</strong>  в котором установлено свойство clear: right
+                        Но при условии что справа будет плавающий элемент ЕСЛИ будет родитель то ничего не произойдёт!
+                    </td>
+                </tr>
+                <tr>
+                    <td>both</td>
+                    <td>Плавающие элементы не разрешены с обеих сторон. <strong>Прерыватель потока!!</strong> Поток будет опущен вниз на ширину самого широкого блока в "в верхлежащем потоке"  Это свойство можно применить и к не-float блокам(при этом float поток возобновится под этим блоком). </td>
+                </tr>
+                <tr>
+                    <td>none</td>
+                    <td>Разрешить наличие плавающих элементов с обеих сторон.</td>
+                </tr>
+                <tr>
+                    <td>inherit</td>
+                    <td>Указывает, что значение наследуется от родительского элемента.</td>
+                </tr>
+            </tbody></table>
+
+            <div class="clear-both border-sol_black clearfix margin_top20">
+                <h3>Пример:clear-right и clear-both!!</h3>
+                <div class="normal">normal #1</div>
+                <div class="normal">normal #2</div>
+
+                <div class="fl2">fl1 - 1</div>
+                <div class="fr2">fr1 - 2</div>
+                <div class="fl2">fl2 - 3</div>
+                <div class="fr2  clear-right">clear-right</div>
+                <div class="fl2">fl3 - 5</div>
+                <div class="fr2">fr3 - 6</div>
+                <div class="fl2">fl4 - 7</div>
+                <div class="fr2 clear-both">clear-both</div>
+                <div class="fl2">fl5 - 9</div>
+                <div class="fr2">fr5 - 10</div>
+            </div>
+            
+            <div class="clear-both border-sol_black clearfix margin_top20">
+                <h3>Пример:Прерыватель потока!!</h3>
+                <div class="fl2">fl1 - 1</div>
+                <div class="fr2">fr1 - 2</div>
+                <div class="fl2">fl2 - 3</div>
+                <div class="fr2">fr2 - 4</div>
+                <div class="fl2">fl3 - 5</div>
+                <div class="fr2">fr3 - 6</div>
+                <div class="normal clear-both"><strong>Прерыватель потока!!</strong> NO float block! class="normal clear-both"</div>
+                <div class="fl2">fl4 - 7</div>
+                <div class="fr2">fr4 - 8</div>
+                <div class="fl2">fl5 - 9</div>
+                <div class="fr2">fr5 - 10</div>
+            </div>
+    </div>
 </body>
 </html>
